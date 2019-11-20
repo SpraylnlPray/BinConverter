@@ -6,9 +6,22 @@ using System.Threading.Tasks;
 
 namespace Festkomma
 {
+
+	public class DataComparer : IComparer<string>
+	{
+		public int Compare(string x, string y)
+		{
+			if (x.Length == y.Length)
+				return x.CompareTo(y);
+			return x.Length.CompareTo(y.Length);
+		}
+	}
+
+
+
 	class Program
 	{
-		static SortedDictionary<string, CharData> _inputData = new SortedDictionary<string, CharData>();
+		static SortedDictionary<string, CharData> _inputData = new SortedDictionary<string, CharData>(new DataComparer());
 		static string _message = string.Empty;
 
 		static void Main(string[] args)
@@ -62,7 +75,7 @@ namespace Festkomma
 
 				range = high - low + 1;
 				var indexOfCurrentChar = GetWBIndexOfChar(Char);
-				var nextEntry = GetEntryOfNextIndex(indexOfCurrentChar);
+				var nextEntry = GetWBEntryOfNextIndex(indexOfCurrentChar);
 				high = low + Convert.ToInt32(range * nextEntry.Value.cumAppearance / _inputData.Last().Value.cumAppearance) - 1;
 				low = low + Convert.ToInt32(range * data.cumAppearance / _inputData.Last().Value.cumAppearance);
 
@@ -152,7 +165,7 @@ namespace Festkomma
 			return data;
 		}
 
-		static KeyValuePair<string, CharData> GetEntryOfNextIndex(int index)
+		static KeyValuePair<string, CharData> GetWBEntryOfNextIndex(int index)
 		{
 			index = index + 1;
 			var asList = _inputData.ToList();
