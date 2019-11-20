@@ -1,0 +1,7 @@
+C:\Users\Daniel\source\repos\Festkomma\Festkomma\bin\Debug\Festkomma.exe.config
+C:\Users\Daniel\source\repos\Festkomma\Festkomma\bin\Debug\Festkomma.exe
+C:\Users\Daniel\source\repos\Festkomma\Festkomma\bin\Debug\Festkomma.pdb
+C:\Users\Daniel\source\repos\Festkomma\Festkomma\obj\Debug\Festkomma.csprojAssemblyReference.cache
+C:\Users\Daniel\source\repos\Festkomma\Festkomma\obj\Debug\Festkomma.csproj.CoreCompileInputs.cache
+C:\Users\Daniel\source\repos\Festkomma\Festkomma\obj\Debug\Festkomma.exe
+C:\Users\Daniel\source\repos\Festkomma\Festkomma\obj\Debug\Festkomma.pdb
