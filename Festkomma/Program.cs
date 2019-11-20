@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Festkomma
 {
-
 	public class DataComparer : IComparer<string>
 	{
 		public int Compare(string x, string y)
@@ -16,8 +15,6 @@ namespace Festkomma
 			return x.Length.CompareTo(y.Length);
 		}
 	}
-
-
 
 	class Program
 	{
@@ -30,7 +27,6 @@ namespace Festkomma
 			string message = Console.ReadLine();
 			// string message = "adcabdcdb";
 			_message = message.ToLower();
-			Console.WriteLine("Input: {0} ", message);
 
 			// Absolute Häufigkeiten
 			foreach (char Char in _message)
