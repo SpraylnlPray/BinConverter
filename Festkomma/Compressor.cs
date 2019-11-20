@@ -20,12 +20,13 @@ namespace Festkomma
 		int _Q2;
 		int _Q3;
 
-		public Compressor()
+		public Compressor(string message)
 		{
+			_message = message;
 			Initialize();
 		}
 
-		void Initialize()
+		public void Initialize()
 		{
 			GetAbsolutAppearances();
 			GetCummulatedAppearances();
@@ -61,20 +62,14 @@ namespace Festkomma
 				cumAppearance = cumAppearance
 			};
 			_inputData["eof"] = eof;
+			Console.WriteLine("eof: absAppearance: {0}, cumAppearance: {1}", eof.absAppearance, eof.cumAppearance);
 		}
 
-		void CompressMessage()
+		public void CompressMessage()
 		{
 			foreach (char Char in _message)
 			{
-				var data = _inputData[Char.ToString()];
-
-				_range = _high - _low + 1;
-				var indexOfCurrentChar = GetWBIndexOfChar(Char);
-				var nextEntry = GetWBEntryOfNextIndex(indexOfCurrentChar);
-				_high = _low + Convert.ToInt32(_range * nextEntry.Value.cumAppearance / _inputData.Last().Value.cumAppearance) - 1;
-				_low = _low + Convert.ToInt32(_range * data.cumAppearance / _inputData.Last().Value.cumAppearance);
-
+				UpdateValues(Char);
 				while (true)
 				{
 					if (_high < _Q2)
@@ -111,6 +106,13 @@ namespace Festkomma
 				}
 			}
 
+			EndOfMessage();
+
+			Console.WriteLine("Encoding result: \n {0}", _output);
+		}
+
+		void EndOfMessage()
+		{
 			_savedNumbers++;
 			if (_low < _Q1)
 			{
@@ -132,6 +134,15 @@ namespace Festkomma
 			}
 		}
 
+		void UpdateValues(char Char)
+		{
+			var data = _inputData[Char.ToString()];
+			_range = _high - _low + 1;
+			var indexOfCurrentChar = GetWBIndexOfChar(Char);
+			var nextEntry = GetWBEntryOfNextIndex(indexOfCurrentChar);
+			_high = _low + Convert.ToInt32(_range * nextEntry.Value.cumAppearance / _inputData.Last().Value.cumAppearance) - 1;
+			_low = _low + Convert.ToInt32(_range * data.cumAppearance / _inputData.Last().Value.cumAppearance);
+		}
 
 		int CalcualteUpperLimit()
 		{
