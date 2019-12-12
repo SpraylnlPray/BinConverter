@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Festkomma
 {
@@ -20,17 +18,43 @@ namespace Festkomma
 		int _Q2;
 		int _Q3;
 
-		public Compressor(string message)
+		public Compressor(bool test)
 		{
-			_message = message;
-			Initialize();
+			if (test)
+			{
+				Console.WriteLine("Enter a letter and its absolute appearance e.g. (a 4)");
+				Console.WriteLine("Entern an empty line to finish datainput.");
+
+				GetManualInput();
+
+				Console.WriteLine("Type the message you want to convert to binary:");
+				_message = Console.ReadLine();
+			}
+			else
+			{
+				Console.WriteLine("Type the message you want to convert to binary:");
+				_message = Console.ReadLine();
+				GetAbsolutAppearances();
+			}
+			GetCummulatedAppearances();
+			SetValues();
 		}
 
-		public void Initialize()
+		void GetManualInput()
 		{
-			GetAbsolutAppearances();
-			GetCummulatedAppearances();
+			string input = Console.ReadLine();
+			while (input != string.Empty)
+			{
+				string[] split = input.Split(' ');
+				CharData data = new CharData();
+				data.absAppearance = Convert.ToInt32(split[1]);
+				_inputData[split[0]] = data;
+				input = Console.ReadLine();
+			}
+		}
 
+		void SetValues()
+		{
 			_low = 0;
 			_high = CalcualteUpperLimit();
 			_range = _high - _low + 1;

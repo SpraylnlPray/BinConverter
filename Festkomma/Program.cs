@@ -10,12 +10,12 @@ namespace Festkomma
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Type your message");
-			string message = Console.ReadLine();
+			Console.WriteLine("Activate test mode? (y)es/(n)o");
+			string testmode = Console.ReadLine();
 
-			Compressor compressor = new Compressor(message.ToLower());
+			Compressor compressor = new Compressor(testmode.ToLower() == "y");
 			compressor.CompressMessage();
-
+			
 			Console.ReadLine();
 		}
 	}
